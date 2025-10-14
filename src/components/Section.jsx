@@ -55,21 +55,21 @@ function FieldContainer({fields, editMode}) {
 }
 
 function Section({ title, fields, editMode, canAdd = false }) {
-  let [copies, setCopies] = useState([0]);
+  let [copies, setCopies] = useState(1);
   let fieldContainers = [];
 
-  for (let i = 0; i < copies.length; i++) {
+  for (let i = 0; i < copies; i++) {
     fieldContainers.push(
-      <FieldContainer key={copies[i]} editMode={editMode} fields={fields}></FieldContainer>
+      <FieldContainer key={i} editMode={editMode} fields={fields}></FieldContainer>
     );
   }
 
   return (
     <div className="section">
       <h2>{title}</h2>
-      {canAdd && <button onClick={() => setCopies([...copies, copies.at(-1) + 1])}>Add New</button>}
-
       {fieldContainers}
+
+      {canAdd && <button onClick={() => setCopies(copies + 1)}>Add New</button>}
     </div>
   );
 }
