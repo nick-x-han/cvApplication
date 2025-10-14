@@ -18,6 +18,7 @@
 
 .fieldName {
     justify-self: end;
+    width: max-content;
 }
 
 .fieldInput {
@@ -34,4 +35,20 @@
         background-color: lightcoral;
     }
     border: none;
+}
+
+.addButton {
+    &:hover {
+        background-color: greenyellow;
+    }
+}
+
+.nothingText {
+    color: red;
+}
+
+textarea {
+    &:disabled {
+        resize: none;
+    }
 }

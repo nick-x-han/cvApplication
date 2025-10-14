@@ -8,8 +8,7 @@ function Input({ field, editMode, className }) {
   let { ...fieldWithoutId } = field;
   delete fieldWithoutId.id;
 
-  if (editMode) {
-    if (field.type === "textarea") {
+  if (field.type === "textarea") {
       return (
         <>
           <textarea
@@ -17,10 +16,14 @@ function Input({ field, editMode, className }) {
             className={className}
             onChange={(e) => setValue(e.target.value)}
             value={value}
+            disabled={editMode ? false : true}
+            
           ></textarea>
         </>
       );
     }
+  if (editMode) {
+    
     return (
       <>
         <input
@@ -36,7 +39,7 @@ function Input({ field, editMode, className }) {
     return (
       <>
         <span className={className}>
-          {value.length > 0 ? value : <i>Nothing provided here</i>}
+          {value.length > 0 ? value : <i className="nothingText">Nothing provided here</i>}
         </span>
       </>
     );
@@ -102,7 +105,7 @@ function Section({ title, fields, editMode, canAdd = false }) {
       {fieldContainers}
 
       {canAddInEditMode && (
-        <button onClick={addFieldContainer}>
+        <button className="addButton" onClick={addFieldContainer}>
           <FaPlus />
         </button>
       )}
