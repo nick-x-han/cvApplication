@@ -1,5 +1,9 @@
 .fieldContainer {
     margin-bottom: 25px;
+    padding: 2em;
+    &:hover {
+        border: 1px solid greenyellow;
+    }
 }
 
 .section {}
