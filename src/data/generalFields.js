@@ -47,8 +47,10 @@ const practicalFields = [
     },
     {
         id: 2,
-        name: "Degree",
-        type: "text",
+        name: "Main Responsibilities",
+        type: "textarea",
+        rows: "5",
+        cols: "50"
     },
     {
         id: 3,

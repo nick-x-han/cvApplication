@@ -5,9 +5,22 @@ import { FaTrash, FaPlus } from "react-icons/fa";
 
 function Input({ field, editMode, className }) {
   let [value, setValue] = useState("");
-  let {_, ...fieldWithoutId} = field;
-  
+  let { ...fieldWithoutId } = field;
+  delete fieldWithoutId.id;
+
   if (editMode) {
+    if (field.type === "textarea") {
+      return (
+        <>
+          <textarea
+            {...fieldWithoutId}
+            className={className}
+            onChange={(e) => setValue(e.target.value)}
+            value={value}
+          ></textarea>
+        </>
+      );
+    }
     return (
       <>
         <input
