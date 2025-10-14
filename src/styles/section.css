@@ -1,5 +1,5 @@
 .fieldContainer {
-    margin-bottom: 25px;
+    margin-bottom: 1em;
     padding: 2em;
     &:hover {
         border: 1px solid greenyellow;

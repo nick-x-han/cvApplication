@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { Fragment } from "react";
 import "../styles/section.css";
-import { FaTrash } from "react-icons/fa";
+import { FaTrash, FaPlus } from "react-icons/fa";
 
-function Input({ type, name, editMode, className }) {
+function Input({ field, editMode, className }) {
   let [value, setValue] = useState("");
+  let {_, ...fieldWithoutId} = field;
+  
   if (editMode) {
     return (
       <>
         <input
           className={className}
-          type={type}
-          name={name}
+          {...fieldWithoutId}
           value={value}
           onChange={(e) => setValue(e.target.value)}
           autoComplete="true"
@@ -33,12 +34,7 @@ function Field({ field, editMode }) {
   return (
     <div className="field">
       <span className="fieldName">{field.name}:</span>{" "}
-      <Input
-        className="fieldInput"
-        type={field.type}
-        name={field.name}
-        editMode={editMode}
-      />{" "}
+      <Input className="fieldInput" field={field} editMode={editMode} />{" "}
     </div>
   );
 }
@@ -59,13 +55,24 @@ function FieldContainer({ fields, editMode, children }) {
 function Section({ title, fields, editMode, canAdd = false }) {
   let [copies, setCopies] = useState([0]);
   let fieldContainers = [];
+  let canAddInEditMode = canAdd && editMode;
+
+  function deleteFieldContainer(deleteId) {
+    let newCopies = copies.filter((id) => id !== deleteId);
+    setCopies(newCopies);
+  }
 
   for (let i = 0; i < copies.length; i++) {
     fieldContainers.push(
       <FieldContainer key={copies[i]} editMode={editMode} fields={fields}>
-        {canAdd && editMode && <button className="deleteButton">
-          <FaTrash />
-        </button>}
+        {canAddInEditMode && (
+          <button
+            className="deleteButton"
+            onClick={() => deleteFieldContainer(copies[i])}
+          >
+            <FaTrash />
+          </button>
+        )}
       </FieldContainer>
     );
   }
@@ -75,9 +82,9 @@ function Section({ title, fields, editMode, canAdd = false }) {
       <h2>{title}</h2>
       {fieldContainers}
 
-      {canAdd && editMode && (
+      {canAddInEditMode && (
         <button onClick={() => setCopies([...copies, copies.at(-1) + 1])}>
-          Add New
+          <FaPlus />
         </button>
       )}
     </div>
