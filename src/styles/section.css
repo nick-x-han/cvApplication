@@ -1,0 +1,20 @@
+.fieldContainer {
+    margin-bottom: 25px;
+}
+
+.section {}
+
+.field {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+}
+
+.fieldName {
+    justify-self: end;
+}
+
+.fieldInput {
+    justify-self: start;
+    margin-left: 1em;
+}
